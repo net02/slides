@@ -1,0 +1,19 @@
+/* Overrides */
+h1 {
+    font-size: 2.5em;
+}
+.cssreflections h2 {
+    -webkit-box-reflect: none;
+    -moz-box-reflect: none;
+}
+pre { font-size: 24px; }
+pre.prettyprint { padding: 12px; }
+
+/* Addons */
+.h1 .small, .h1 small, .h2 .small, .h2 small, .h3 .small, .h3 small, h1 .small, h1 small, h2 .small, h2 small, h3 .small, h3 small {
+    font-size: 65%;
+    font-weight: 400;
+    line-height: 1;
+    color: #777;
+}
+.greyed { opacity: 0.4; }
