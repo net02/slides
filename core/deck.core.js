@@ -337,7 +337,7 @@ that use the API provided by core.
     removeContainerHashClass($.deck('getSlide', from).attr('id'));
     addContainerHashClass($.deck('getSlide', to).attr('id'));
     if (Modernizr.history) {
-      window.history.replaceState({}, "", hashPath);
+      try{window.history.replaceState({}, "", hashPath);}catch(err){if (!err.message.startsWith("Failed to execute 'replaceState' on 'History'")){throw new Error(err.message);}}
     }
   };
 
