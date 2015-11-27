@@ -1,123 +1,83 @@
-
-		
 		.data
-
 		menu: .asciiz "\n \nPer calcolare la lunghezza digita 1); \n Per uscire digita 2)"
-
-
 		invio: .asciiz " \n Poi premi invio "
 		parola: .asciiz "\n Parola numero "
 		conto: .asciiz ": "		
 		ris:  .asciiz "\n Ultima parola: "
 		str: 	.asciiz "\n Inserisci una stringa o un numero: "
-		
-		strBuffer: .space 256	#alloca n byte in questo riferimento di memoria
-
+		strBuffer: .space 256
 		saluto: .asciiz "\n Arrivederci"
 		errore: .asciiz "\n Hai sbagliato,riprova \n"
-		
 
 		.text
 		.globl __start
-
-main:
-
-__start:	#azzero i reg temporanei che mi serviranno
-		move	$t0, $zero   	#puntatore nuovo carattere
-		move	$t1, $zero	#contenitore carattere
-		move	$t2, $zero	#contatore caratteri
-		move	$t3, $zero	#contatore parole
-		move	$t4, $zero
-		move	$t5, $zero
-		move	$t6, $zero
-		move	$t7, $zero
-
-		li	$v0,4        	# servizio print_string carica nel reg $a0 quello che c'è nell'eticheta menu,esce la stringa
+__start:
+		move $t0, $zero 
+		move $t1, $zero	
+		move $t2, $zero	
+		move $t3, $zero	
+		move $t4, $zero
+		move $t5, $zero
+		move $t6, $zero
+		move $t7, $zero
+		li	$v0,4        	
 		la	$a0,menu
-		syscall         	# stampa il 'menu'
-
-       		li	$v0,4        	# servizio print_string
-            	la	$a0,invio
-
-            	syscall         	# stampa la stringa
-
-		li	$v0,5        	# servizio read_int
-            	syscall         	# legge un numero
-
-            	beq	$v0,1,length
-            	beq	$v0,2,esci
-		bne     $v0,1,err
-				
-
-length:		li	$v0,4        	# servizio print_string
-            	la	$a0,str
-            	syscall         	# stampa il prompt
-            	
-		li	$v0,8        	# servizio read_string
-            	la	$a0,strBuffer 	#carica in a0 l'indirizzo in mem  di quello che leggo
-            	li	$a1,256
-            	syscall         	# legge una stringa
-
-		la	$t0,strBuffer 	#carico l'ndirizzo del buffer
-loop:		lb	$t1, 0($t0)	#carico la prima lettera
+		syscall         	
+   		li	$v0,4       
+    	la	$a0,invio
+    	syscall     
+		li	$v0,5        	
+    	syscall     
+    	beq	$v0,1,length
+    	beq	$v0,2,esci
+		bne $v0,1,err
+length:	li	$v0,4
+    	la	$a0,str
+    	syscall      
+		li	$v0,8    
+    	la	$a0,strBuffer 
+    	li	$a1,256
+    	syscall        
+		la	$t0,strBuffer 
+loop:	lb	$t1, 0($t0)
 		beq	$t1,0x0a,risultato
-
-		addi	$t0,$t0,1
-
+		addi $t0,$t0,1
 		beq	$t1,0x20,newword
-		
-
-		jal isletter	   	#incrementa il contatore se è una lettera
-		j	loop 		#continuo a vedere quanti caratteri ci sono
-
-newword:	li	$v0, 4        	# servizio print_string
-            	la	$a0, parola
-            	syscall         	# stampa il prompt
-
-		addi	$t3,$t3,1
-            	
-		li	$v0,1        	# servizio print_int
-            	move	$a0,$t3  	# carico il valore da visualizzare
-            	syscall        		# stampa la lunghezza
-
-		li	$v0, 4        	# servizio print_string
-            	la	$a0, conto
-            	syscall         	# stampa il prompt
-            	
-		li	$v0,1        	# servizio print_int
-            	move	$a0,$t2 	# carico il valore da visualizzare
-            	syscall        		# stampa la lunghezza
-
-		move	$t2, $zero	#azzera il contatore dei caratteri
-            	
+		jal isletter
+		j	loop 
+newword:li	$v0, 4   
+    	la	$a0, parola
+    	syscall 
+		addi $t3,$t3,1            	
+		li	$v0,1 
+    	move $a0,$t3 
+    	syscall
+		li	$v0, 4 
+    	la	$a0, conto
+    	syscall
+		li	$v0,1
+    	move $a0,$t2 
+    	syscall 
+		move $t2, $zero	
 		j	loop
-
-
-risultato:	li	$v0, 4        	# servizio print_string
-            	la	$a0, ris
-            	syscall         	# stampa il prompt
-            	
-		li	$v0,1        	# servizio print_int
-            	move	$a0,$t2  	# carico il valore da visualizzare
-            	syscall        		# stampa la lunghezza
-            	
+risultato:li $v0, 4 
+    	la	$a0, ris
+    	syscall 
+		li	$v0,1 
+    	move $a0,$t2 
+    	syscall
 		j	__start
-
-
-esci:		li	$v0,4        	# servizio print_string
+esci:	li	$v0,4 
 		la	$a0,saluto
-		syscall         	# stampa il saluto
-
+		syscall       
 		li $v0,10
 		syscall
-
-err:		li	$v0,4        	# servizio print_string
+err:	li	$v0,4 
 		la	$a0,errore
 		syscall  
 		j	 __start	
-
-isletter:	ori $t1, $t1, 0x20	#rendo minuscola	
-		blt $t1, 0x61, exit	# se non è in questo range non è una lettera
+isletter: ori $t1, $t1, 0x20
+		blt $t1, 0x61, exit	
 		bgt $t1, 0x7a, exit
-		addi	$t2, $t2,1	#incremento il contatore
-exit:		jr $ra		
+		addi	$t2, $t2,1	
+exit:	jr $ra		

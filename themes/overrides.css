@@ -11,7 +11,7 @@ pre.prettyprint { padding: 12px; }
 h1, h2, h3, h4, h5, h6, .deck-container { font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; }
 
 /* Addons */
-.h1 .small, .h1 small, .h2 .small, .h2 small, .h3 .small, .h3 small, h1 .small, h1 small, h2 .small, h2 small, h3 .small, h3 small {
+.h1 .small, .h1 small, .h2 .small, .h2 small, .h3 .small, .h3 small, h1 .small, h1 small, h2 .small, h2 small, h3 .small, h3 small, p .small {
     font-size: 65%;
     font-weight: 400;
     line-height: 1;
