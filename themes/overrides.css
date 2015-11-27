@@ -9,6 +9,8 @@ h1 {
 pre { font-size: 24px; font-family: Menlo,Monaco,Consolas,"Courier New",monospace; }
 pre.prettyprint { padding: 12px; }
 h1, h2, h3, h4, h5, h6, .deck-container { font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; }
+blockquote:before { font-size: 2em; left: 5px; }
+blockquote { font-size: 1em; padding: 1em 1em .5em 1em; }
 
 /* Addons */
 .h1 .small, .h1 small, .h2 .small, .h2 small, .h3 .small, .h3 small, h1 .small, h1 small, h2 .small, h2 small, h3 .small, h3 small, p .small {
