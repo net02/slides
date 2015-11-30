@@ -41,18 +41,189 @@
                 </ol>
             </section>
             <section class="slide">
-                <h1></h1>
+                <h2>Information</h2>
+                <p>All the information about any computable problem can be represented using only 0 and 1</p>
+                <div class="slide">
+                    <ul>
+                        <li>bit</li>
+                        <li>byte</li>
+                        <li>word</li>
+                    </ul>
+                    <img src="images/lesson4/bits.jpg"/>
+                </div>
             </section>
             <section class="slide">
-                <h1><br/><small></small></h1>
+                <h2>Memory addressing</h1>
+                <img src="images/lesson4/bus.png"/>
+                <ul>
+                    <li class="slide">8 bits -> <strong>256</strong> addresses</li>
+                    <li class="slide">16 bits -> <strong>65.536</strong> addresses</li>
+                    <li class="slide">32 bits -> <strong>4.294.967.295</strong> addresses</li>
+                    <li class="slide">64 bits -> <strong>18.446.744.073.709.551.615</strong> addresses</li>
+                </ul>
             </section>
-            <!--
-https://en.wikipedia.org/wiki/Primitive_data_type#Specific_primitive_data_types
-https://it.wikipedia.org/wiki/Struttura_dati
-https://en.wikipedia.org/wiki/Data_structure#Overview (statiche: calcolo address vs dinamiche: pointer linkato)
-https://en.wikipedia.org/wiki/Data_structure#Examples
-https://it.wikipedia.org/wiki/Struttura_dati#Contenitori
-            -->
+            <section class="slide">
+                <h2>Memory addressing<br/><small>Word size</small></h1>
+                <img src="images/lesson4/word-size.png"/>
+            </section>
+            <section class="slide">
+                <h2>Primitive data types</h2>
+                <ul>
+                    <li>Integer (signed / unsigned)</li>
+                    <li>Floating-point (float / double)</li>
+                    <li>Boolean</li>
+                    <li>Character</li>
+                    <li>Reference</li>
+                </ul>
+            </section>
+            <section class="slide">
+                <h2>Data structures</h2>
+                <p><strong>A particular way of organizing data in a computer so that it can be used efficiently</strong></p>
+                <p>Efficient data structures are key to designing efficient algorithms</p>
+                <p style="margin-top:5%"><em>Static</em> vs <em>Linked</em></p>
+            </section>
+            <section class="slide">
+                <h2>Static Data structures</h2>
+                <ul>
+                    <li>Array</li>
+                    <li>Record</li>
+                    <li>Union</li>
+                </ul>
+            </section>
+            <section class="slide">
+                <h2>Array</h2>
+                <p>Contiene un numero di <em>elementi</em> (dello stesso tipo) in un determinato ordine.<br/>Gli elementi sono individuati attraverso un indice numerico</p>
+                <img src="images/lesson4/array.jpg"/>
+                <div class="slide"><img style="padding:10px;background:white" src="images/lesson4/array-multi.png"/></div>
+            </section>
+            <section class="slide">
+                <h2>Record (struct)</h2>
+                <p>Contiene un numero di <em>campi</em> (dello stesso tipo) di tipo eterogeneo.<br/>I campi sono individuati attraverso un nome</p>
+                <pre class="prettyprint lang-c">struct date {
+   int year;
+   int month;
+   int day;
+};</pre>
+            </section>
+            <section class="slide">
+                <h2>Union</h2>
+                <p>Specifica due o più tipi di dato che può contenere.</p>
+                <p>Anche <em>Tagged Union</em></p>
+            </section>
+            <section class="slide">
+                <h2>Linked Data structures</h2>
+                <ul>
+                    <li>List</li>
+                    <li>Tree</li>
+                    <li>Graph</li>
+                    <li>Hash table</li>
+                </ul>
+            </section>
+            <section class="slide">
+                <h2>List</h2>
+                <p><em>Nodi</em> che contengono un valore ed il puntatore al nodo successivo</p>
+                <img src="images/lesson4/linked-list.png"/>
+                <div class="slide" style="text-align:center">Anche bidirezionale<img src="images/lesson4/linked-list-bi.png"/></div>
+            </section>
+            <section class="slide">
+                <h2>Tree</h2>
+                <p>Ogni nodo contiene due (o più) puntatori ad altri nodi, detti <em>figli</em>.<br/>Un albero deve essere privo di cicli.</p>
+                <img style="min-width:40%;background:white" src="images/lesson4/tree.png"/>
+            </section>
+            <section class="slide">
+                <h2>Graph</h2>
+                <img src="images/lesson4/graph.png"/>
+            </section>
+            <section class="slide">
+                <h2>Hash table</h2>
+                <p>Mette in corrispondenza una <em>chiave</em> con il relativo valore.</p>
+                <img style="min-width:40%;background:white" src="images/lesson4/hash.png"/>
+            </section>
+            <section class="slide">
+                <h2>Container</h2>
+                <ul>
+                    <li>Pila</li>
+                    <li>Coda</li>
+                    <li>Array Associativo</li>
+                </ul>
+            </section>
+            <section class="slide">
+                <h2>Pila</h2>
+                <p>Last In First Out</p>
+                <img src="images/lesson4/stack-lifo.png"/>
+            </section>
+            <section class="slide">
+                <h2>Pila</h2>
+                <p>First In First Out</p>
+                <img src="images/lesson4/stack-fifo.png"/>
+            </section>
+            <section class="slide">
+                <h2>Array Associativo</h2>
+                <pre class="prettyprint lang-php">$phonebook = array(
+    'Sally Smart'      => '555-9999',
+    'John Doe'         => '555-1212',
+    'J. Random Hacker' => '555-1337',
+);</pre>
+            </section>
+            <section class="slide">
+                <h2>Language support<br/><span class="small">PHP</span></h2>
+                <p>Boolean</p>
+                <pre class="prettyprint lang-php">$a = true;
+$b = false;</pre>
+                <p>Integer</p>
+<pre class="prettyprint lang-php">$a = 1234; // decimal number
+$a = -123; // a negative number
+$b = 0123; // octal number (equivalent to 83 decimal)
+$c = 0x1A; // hexadecimal number (equivalent to 26 decimal)
+$d = 0b11111111; // binary number (equivalent to 255 decimal)</pre>
+                <p>Float</p>
+<pre class="prettyprint lang-php">$a = 1.234;
+$b = 1.2e3;
+$c = 7E-10;</pre>
+            </section>
+            <section class="slide">
+                <h2>Language support<br/><span class="small">PHP</span></h2>
+                <p>String</p>
+                <pre class="prettyprint lang-php">$a = 'hello';
+$b = "World";</pre>
+                <p>Array</p>
+<pre class="prettyprint lang-php">$array = array(
+    "nome" => "Andrea",
+    "cognome" => "Rossi",
+);
+$matrix = [[1,2,3], [4,5,6], [7,8,9]];</pre>
+                <p>Object</p>
+<pre class="prettyprint lang-php">$obj = new stdObject();
+$obj->name = "Nick";
+$obj->surname = "Doe";
+$obj->age = 20;</pre>
+            </section>
+            <section class="slide">
+                <h2>Language support<br/><span class="small">Javascript</span></h2>
+                <p>Boolean</p>
+                <pre class="prettyprint lang-javascript">x = false;</pre>
+                <p>Numbers (int e float)</p>
+<pre class="prettyprint lang-javascript">n = 052;
+n = 0x2A;
+n = 4.2e1;</pre>
+            </section>
+            <section class="slide">
+                <h2>Language support<br/><span class="small">Javascript</span></h2>
+                <p>String</p>
+                <pre class="prettyprint lang-javascript">s = 'test';</pre>
+                <p>Array</p>
+<pre class="prettyprint lang-javascript">a = ["a", "b", "c"];
+a[19] = "u"; // le posizioni intermedie vegono occupate da elementi "undefined"</pre>
+                <p>Object</p>
+<pre class="prettyprint lang-javascript">var corso = {
+  argomento: "Computer Science",
+  "lezione": 4,
+  iniziato: true,
+  argomenti: ["algoritmi", "strutture dati"]
+};
+corso.autore = "Daniele";
+var now = new Date();</pre>
+            </section>
             <!-- End slides. -->
 
             <!-- Begin extension snippets. -->

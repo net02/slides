@@ -1,0 +1,59 @@
+<script>
+// due modi per creare oggetti, preferibile il secondo
+obj = new Object();
+obj = {}; //literal syntax
+
+obj.name = "Simon"; // aggiungo proprietà in due modi
+obj["name"] = "Simon";
+
+// o con la literal syntax posso definire già le proprietà dell'oggetto
+obj = {
+    name: "Carrot",  
+    "for": "Max",  
+    details: {  
+        color: "orange",  
+        size: 12  
+    }  
+}
+//accedo alle proprietà dell'oggetto
+obj.details.color;
+obj["details"]["size"];
+JSON.stringify(obj);  // ottengo una rappresentazione in formato JSON, leggibile dall'uomo e parsabile dall'interpreter
+
+a = ["a", "b", "c"];
+a.length;
+//se inserisco elementi con alto index all'array
+a[19] = "u";
+a.length;
+//le posizioni intermedie vegono occupate da elementi "undefined"
+typeof a[10];
+a;
+
+//append:
+a[a.length] = 'v';
+//è uguale al metodo
+a.push('z');
+a.toString();
+// Altre funzioni:
+//    concat ritorna un nuovo array aggiungendo gli oggetti concatenandoli
+//    pop rimuove dall'array e ritorna l'ultimo elemento
+//    push aggiunge elementi in fondo all'array
+//    slice ritorna una sottoparte dell'array
+//    sort ordina, confrontando gli elementi tramite la funzione specificata come argomento
+//    splice lets you modify an array by deleting a section and replacing it with more items
+//    shift tira fuori il primo
+//    unshift aggiunge alla testa dell'array
+
+now = new Date() // un oggetto che rappresenta una data
+new Date(milliseconds)  // 1338260702000
+new Date(dateString)  //ad esempio una stinga '2011-01-30'
+new Date(year, month, day [, hour, minute, second, millisecond ]);
+now.getDay() // 0 domenica , 1 lunedì etc
+now.setHours(parseInt(now.getHours()) + 4)
+
+//calcolo tempo di esecuzione
+var start = new Date();
+for(i = 0; i < 100000; i++) { }
+var end = new Date();
+elapsed = end.getTime() - start.getTime(); // time in milliseconds
+</script>

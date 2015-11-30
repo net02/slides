@@ -1,0 +1,43 @@
+<script>
+// una variabile è un nome simbolico a cui si associa un valore
+var x;
+// assegno il valore con "="
+x = 0;
+x // => 0: una variabile ha come output il suo valore
+// differenti tipi di dato
+x = 1; // Numbers.
+x = 0.01; // sia interi che decimali
+x = "hello world"; // String delimitata da "
+x = 'JavaScript'; // o da singoli '
+x = true; // valori Booleani
+x = false;
+x = null; // "nessun valore"
+// il tipo dato più importante: l'oggetto (una collezione di proprietà - valore)
+var corso = { // racchiusi da graffe
+  argomento: "JavaScript", // la proprietà "argomento" ha valore "JavaScript".
+  iniziato: true
+};
+// ottengo il valore di una proprietà dell'oggetto concatendando . o []:
+corso.argomento // => "JavaScript"
+corso["iniziato"] // => true
+corso.autore = "Daniele"; // aggiungo una proprietà assegnandole il valore
+corso.contenuti = {}; // {} oggetto vuoto
+// Array (particolari tipi di oggetti)
+var primi = [2, 3, 5, 7];
+primi[0] // => 2: il primo elemento dell'array
+primi.length // => 4: quanti elementi contiene
+primi[primi.length-1] // => 7: l'ultimo elemento
+primi[4] = 9; // aggiungo
+primi[4] = 11; // o modifico elementi
+var empty = []; // [] array vuoto
+empty.length // => 0
+// posso nidificare a piacimento array e oggetti
+var punti = [ // è un array di due elementi
+  {x:0, y:0}, // ciascun elemento è un oggetto
+  {x:1, y:1}
+];
+var dati = { // oggetto con due proprietà
+  trial1: [[1,2], [3,4]], // il valore di ogni proprietà è un array bidimensionale
+  trial2: [[2,3], [4,5]] // (gli elementi dell'array sono array)
+};
+</script>

@@ -1,0 +1,33 @@
+<script>
+// notazione ottale, esadecimale, scientifica
+n = 052;
+n = 0x2A;
+n = 4.2e1;
+
+parseInt("123", 10) //il secondo parametro è la base in cui interpretare il numero
+parseInt("010", 10) // => 10
+parseInt("010") // se non specifico la base.. => 8 (10 in base 8)
+
+parseInt("11", 2) // dal binario
+parseInt("4.2abc12") // converte fino a dove riesce
+parseFloat("3.6")
+
+r = + "2" //ulteriore metodo per convertire (ma se è una stringa come "4.2abc12" di prima, dà Not a Number)
+
+//l'oggetto Math contiene funzioni matematiche avanzate
+Math.sin(3.5);  
+a = Math.PI * r * r;
+
+Math.sin(Math.PI); // non ottengo 0! devo sempre arrotondare per essere sicuro, vedi sotto
+Math.round(Math.sin(Math.PI) * 1e15) / 1e15;
+
+parseInt("hello", 10); // Not a Number! è un numero speciale
+NaN + 5; // è "tossico" nelle operazioni, ritorna sempre NaN
+isNaN(NaN)  // => true  , solo in questo caso
+
+1 / 0;  // +/-Infinite , un altro numero speciale
+-1 / 0;
+isFinite(1 / 0);
+isFinite(NaN);
+parseInt(a) == parseFloat(a) // test su interi
+</script>
