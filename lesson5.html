@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=1024, user-scalable=no">
+        <title>CS Introduction - Analisi di complessità</title>
+        <!-- Required stylesheet -->
+        <link rel="stylesheet" media="screen" href="core/deck.core.css">
+        <!-- Extension CSS files go here. Remove or add as needed. -->
+        <link rel="stylesheet" media="screen" href="extensions/goto/deck.goto.css">
+        <link rel="stylesheet" media="screen" href="extensions/menu/deck.menu.css">
+        <link rel="stylesheet" media="screen" href="extensions/navigation/deck.navigation.css">
+        <link rel="stylesheet" media="screen" href="extensions/status/deck.status.css">
+        <link rel="stylesheet" media="screen" href="extensions/scale/deck.scale.css">
+        <link rel="stylesheet" media="screen" href="extensions/google-code-prettify/prettify.css">
+        <!-- Style theme. More available in /themes/style/ or create your own. -->
+        <link rel="stylesheet" media="screen" href="themes/style/web-2.0.css">
+        <!-- Transition theme. More available in /themes/transition/ or create your own. -->
+        <link rel="stylesheet" media="screen" href="themes/transition/horizontal-slide.css">
+        <!-- Basic black and white print styles -->
+        <link rel="stylesheet" media="print" href="core/print.css">
+        <link rel="stylesheet" media="screen" href="themes/overrides.css">
+        <!-- Required Modernizr file -->
+        <script src="modernizr.custom.js"></script>
+    </head>
+    <body>
+        <div class="deck-container">
+            <!-- Begin slides. Just make elements with a class of slide. -->
+            <section class="slide">
+                <h1>Computer science introduction<br/><small>Lesson 5</small></h1>
+            </section>
+            <section class="slide">
+                <h2>Overview</h2>
+                <ol>
+                    <li class="greyed">Basic algorythms &amp; Control flow structures</li>
+                    <li class="greyed">Data structures</li>
+                    <li>Big O &amp; Complexity analysis</li>
+                    <li class="greyed">Object Oriented Programming</li>
+                    <li class="greyed">Parallelism &amp; Concurrency</li>
+                </ol>
+            </section>
+            <!--
+https://it.wikipedia.org/wiki/Teoria_della_complessit%C3%A0_computazionale
+https://it.wikipedia.org/wiki/O-grande
+https://en.wikipedia.org/wiki/Nondeterministic_algorithm
+https://en.wikipedia.org/wiki/Analysis_of_algorithms
+https://en.wikipedia.org/wiki/Best,_worst_and_average_case
+https://en.wikipedia.org/wiki/Sorting_algorithm
+https://en.wikipedia.org/wiki/Time_complexity
+            -->
+            <!-- End slides. -->
+
+            <!-- Begin extension snippets. -->
+            <!-- deck.status snippet -->
+            <p class="deck-status" aria-role="status">
+                <span class="deck-status-current"></span>
+                /
+                <span class="deck-status-total"></span>
+            </p>
+            <!-- deck.goto snippet -->
+            <form action="." method="get" class="goto-form">
+                <label for="goto-slide">Go to slide:</label>
+                <input type="text" name="slidenum" id="goto-slide" list="goto-datalist">
+                <datalist id="goto-datalist"></datalist>
+                <input type="submit" value="Go">
+            </form>
+            <!-- End extension snippets. -->
+        </div>
+        <!-- Required JS files. -->
+        <script src="jquery.min.js"></script>
+        <script src="core/deck.core.js"></script>
+        <!-- Extension JS files. -->
+        <script src="extensions/menu/deck.menu.js"></script>
+        <script src="extensions/goto/deck.goto.js"></script>
+        <script src="extensions/status/deck.status.js"></script>
+        <script src="extensions/navigation/deck.navigation.js"></script>
+        <script src="extensions/scale/deck.scale.js"></script>
+        <script src="extensions/events/deck.events.js"></script>
+        <script src="extensions/step/deck.step.js"></script>
+        <script src="extensions/anim/deck.anim.js"></script>
+        <script src="extensions/google-code-prettify/prettify.js"></script>
+        <script src="extensions/lessons.js"></script>
+    </body>
+</html>
