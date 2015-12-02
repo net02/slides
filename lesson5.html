@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=1024, user-scalable=no">
-        <title>CS Introduction - Analisi di complessità</title>
+        <title>CS Introduction - Complessità computazionale</title>
         <!-- Required stylesheet -->
         <link rel="stylesheet" media="screen" href="core/deck.core.css">
         <!-- Extension CSS files go here. Remove or add as needed. -->
@@ -23,6 +23,7 @@
         <link rel="stylesheet" media="screen" href="themes/overrides.css">
         <!-- Required Modernizr file -->
         <script src="modernizr.custom.js"></script>
+        <style type="text/css">.cat { margin: 5% auto; max-width: 90%; max-height: 90%; } code { color: #222; }</style>
     </head>
     <body>
         <div class="deck-container">
@@ -40,15 +41,199 @@
                     <li class="greyed">Parallelism &amp; Concurrency</li>
                 </ol>
             </section>
-            <!--
-https://it.wikipedia.org/wiki/Teoria_della_complessit%C3%A0_computazionale
-https://it.wikipedia.org/wiki/O-grande
-https://en.wikipedia.org/wiki/Nondeterministic_algorithm
-https://en.wikipedia.org/wiki/Analysis_of_algorithms
-https://en.wikipedia.org/wiki/Best,_worst_and_average_case
-https://en.wikipedia.org/wiki/Sorting_algorithm
-https://en.wikipedia.org/wiki/Time_complexity
-            -->
+            <section class="slide">
+                <img class="cat" src="http://thecatapi.com/api/images/get?format=src&type=jpg&size=full&1" />
+            </section>
+            <section class="slide">
+                <h2>Algorithm</h2>
+                <ul>
+                    <li>atomicità</li>
+                    <li>non ambiguità</li>
+                    <li><strong>finitezza</strong></li>
+                    <li><strong>terminazione</strong></li>
+                    <li><em>effettività</em></li>
+                </ul>
+                <div class="slide">
+                    <h3>Complessità computazionale</h3>
+                    <p>Risorse minime necessarie (tempo di calcolo e memoria) per la risoluzione di un problema</p>
+                </div>
+            </section>
+            <section class="slide">
+                <h2>Misurazione delle risorse</h2>
+                <p>Indipendente dalle tecnologie utilizzate</p>
+                <div class="slide">
+                    <h3>Tempo</h3>
+                    <p>input di dimensione <code>n</code> &#8594; risultato in <code>f(n)</code> passi</p>
+                </div>
+                <div class="slide">
+                    <h3>Spazio</h3>
+                    <p>input di dimensione <code>n</code> &#8594; utilizza <code>f(n)</code> celle <em>temporanee</em> di memoria</p>
+                </div>
+            </section>
+            <section class="slide">
+                <h2>Misurazione delle risorse<br/><span class="small">esempio</span></h2>
+                <pre class="prettyprint lang-php">$input = [1,2,3];
+for ($x = 0; $x < count($input); $x++) {
+    echo "Il valore è " . $input[$x];
+}</pre>
+                <div class="slide">
+                    <p><strong>Tempo:</strong> <code>f(n) = (n + 1) + n = 2n + 1</code></p>
+                    <p><strong>Spazio:</strong> <code>f(n) = 1</code></p>
+                </div>
+                <div class="slide">
+                    <pre class="prettyprint lang-php">$input = 10;
+for ($x = 1; $x <= $input; $x++) {
+    $array = range(1, $x);  // array(1, 2, .. , $x);
+    for ($y = 0; $y < count($array); $y++) {
+        echo "Il valore è " . $x * $array[$y];
+    }
+}</pre>
+                    <p><strong>Tempo:</strong> <code>f(n) = (n + 1) + (2 + 3 + .. + n + n+1) + (1 + 2 + .. + n)</code>
+                        <br/><span style="visibility:hidden"><strong>Tempo:</strong> <code>f(n) </code></span><code>= &#189;(n<sup>2</sup> + n) + &#189;(n<sup>2</sup> + 3n) + n + 1</code>
+                        <br/><span style="visibility:hidden"><strong>Tempo:</strong> <code>f(n) </code></span><code>= n<sup>2</sup> + 3n + 1</code>
+                    </p>
+                    <p><strong>Spazio:</strong> <code>f(n) = n</code></p>
+                </div>
+            </section>
+            <section class="slide">
+                <img class="cat" src="http://thecatapi.com/api/images/get?format=src&type=jpg&size=full&2" />
+            </section>
+            <section class="slide">
+                <h2>Big O notation</h2>
+                <p>Misurazione troppo dettagliata, approssimo</p>
+                <h3>Stima asintotica</h3>
+                <img style="min-width:70%; padding:10px; background:white; margin-left: 0" src="images/lesson5/o-formula.png" />
+                <p>"La funzione <code>f(n)</code> da un certo <code>n</code> in poi cresce al più come la funzione <code>g(n)</code>"
+                <div class="slide"><img src="images/lesson5/o-graph.png" /></div>
+            </section>
+            <section class="slide">
+                <img class="cat" src="http://thecatapi.com/api/images/get?format=src&type=jpg&size=full&3" />
+            </section>
+            <section class="slide">
+                <h2>Big O notation<br/><span class="small">esempio</span></h2>
+                <pre class="prettyprint lang-php">$input = [1,2,3];
+for ($x = 0; $x < count($input); $x++) {
+    echo "Il valore è " . $input[$x];
+}</pre>
+                <p><strong>Tempo:</strong> <code>f(n) = O(n)</code><br/><strong>Spazio:</strong> <code>f(n) = O(1)</code></p>
+                <pre class="prettyprint lang-php">$input = 10;
+for ($x = 1; $x <= $input; $x++) {
+    $array = range(1, $x);  // array(1, 2, .. , $x);
+    for ($y = 0; $y < count($array); $y++) {
+        echo "Il valore è " . $x * $array[$y];
+    }
+}</pre>
+                <p><strong>Tempo:</strong> <code>f(n) = O(n<sup>2</sup>)</code><br/><strong>Spazio:</strong> <code>f(n) = O(n)</code></p>
+            </section>
+            <section class="slide">
+                <h2>Big O notation<br/><span class="small">valutazione di un algoritmo</span></h2>
+                <ul>
+                    <li><em>caso ottimo</em></li>
+                    <li><em>caso peggiore</em></li>
+                    <li><em>caso medio</em></li>
+                </ul>
+                <div class="slide">
+                    <pre class="prettyprint lang-php">foreach ($input as $value) {
+    if ($value == 1) {
+        break;
+    }
+}</pre>
+                    <pre class="prettyprint lang-php">$input = [1,2,3,4,5];
+$input = [5,4,3,2,1];
+$input = [2,5,1,3,4];</pre>
+                </div>
+            </section>
+            <section class="slide">
+                <h2>Big O notation<br/><span class="small">and friends</span></h2>
+                <img style="min-width:90%; padding:10px; background:white;" src="images/lesson5/o-theta-omega.jpg" />
+                <ul>
+                    <li><strong>O grande</strong> <em>(a)</em>: limite superiore</li>
+                    <li><strong>Omega grande</strong> <em>(a)</em>: limite inferiore</li>
+                    <li><strong>Theta grande</strong> <em>(a)</em>: limite inferiore e superiore</li>
+                </ul>
+            </section>
+            <section class="slide">
+                <img class="cat" src="http://thecatapi.com/api/images/get?format=src&type=jpg&size=full&4" />
+            </section>
+            <section class="slide">
+                <h2>Big O notation<br/><span class="small">ordini di funzioni</span></h2>
+                <img src="images/lesson5/o-classes.png" />
+                <div class="slide">
+                    <blockquote>
+                        <p>computational problems can be feasibly computed on some computational device only if they can be computed in polynomial time</p>
+                        <p><cite>Tesi di Cobham</cite></p>
+                    </blockquote>
+                </div>
+            </section>
+            <section class="slide">
+                <h2>Big O notation<br/><span class="small">ordini di funzioni</span></h2>
+                <img src="images/lesson5/pol-vs-exp-vs-fact.png" />
+                <img style="float: left" src="images/lesson5/pol-vs-exp-1.png" />
+                <img style="float: right" src="images/lesson5/pol-vs-exp-2.png" />
+            </section>
+            <section class="slide">
+                <h2>Classi di complessità</h2>
+                <p>Raggruppo i problemi in classi
+                <ul>
+                    <li><code>TIME(f(n))</code>: risolvibili da un algoritmo che opera in tempo <code>f(n)</code></li>
+                    <li><code>NTIME(f(n))</code>: risolvibili da un algoritmo <strong>non deterministico</strong> che opera in tempo <code>f(n)</code></li>
+                    <li><code>SPACE(f(n))</code>: risolvibili da un algoritmo che opera in spazio <code>f(n)</code></li>
+                    <li><code>NSPACE(f(n))</code>: risolvibili da un algoritmo <strong>non deterministico</strong> che opera in spazio <code>f(n)</code></li>
+                </ul>
+                <img class="slide" src="images/lesson5/non-deterministic.png" />
+            </section>
+            <section class="slide">
+                <h2>Classi di complessità</h2>
+                <div style="float:left">
+                    <ul>
+                        <li><code>L = SPACE(log(n))</code></li>
+                        <li><code>NL = SPACE(log(n))</code></li>
+                        <li><code>P = TIME(n<sup>k</sup>)</code></li>
+                        <li><code>NP = NTIME(n<sup>k</sup>)</code></li>
+                        <li><code>PSPACE = SPACE(n<sup>k</sup>)</code></li>
+                        <li><code>NPSPACE = NSPACE(n<sup>k</sup>)</code></li>
+                        <li><code>EXP = TIME(2<sup>n<sup>k</sup></sup>)</code></li>
+                    </ul>
+                </div>
+                <div style="float:right">
+                    <img src="images/lesson5/complexity-classes.png" />
+                </div>
+            </section>
+            <section class="slide">
+                <h1 style="color:black">P = NP <em>???</em></h1>
+            </section>
+            <section class="slide">
+                <img class="cat" src="http://thecatapi.com/api/images/get?format=src&type=jpg&size=full&5" />
+            </section>
+            <section class="slide">
+                <img class="cat" src="http://thecatapi.com/api/images/get?format=src&type=jpg&size=full&6" />
+            </section>
+            <section class="slide">
+                <h2>Problema del commesso viaggiatore</h2>
+                <blockquote>
+                    <p>data una rete di città, connesse tramite delle strade, trovare il percorso di minore lunghezza per visitare tutte le città una e una sola volta</p>
+                </blockquote>
+                <div class="slide">
+                    <h3>Algoritmi esatti</h3>
+                    <ul>
+                        <li>brute-force (<code>O(n!)</code>)</li>
+                        <li>branch and bound / branch and cut: ~50/200 città (<code>O(n<sup>2</sup>2<sup>n</sup>)</code>)</li>
+                        <li>cutting plane: 33.810 città &#8594; 15,7 anni)</li>
+                    </ul>
+                </div>
+                <div class="slide">
+                    <h3>Algoritmi approssimati (euristiche)</h3>
+                    <p>"alta" probabilità di produrre una "buona" soluzione "velocemente"</p>
+                </div>
+            </section>
+            <section class="slide">
+                <h2>Comparazione di algoritmi</h2>
+                <p>Ordinamento (per comparazione)</p>
+                <img src="images/lesson5/sorting.png" />
+            </section>
+            <section class="slide">
+                <img class="cat" src="images/lesson5/extra/cat.jpg" />
+            </section>
             <!-- End slides. -->
 
             <!-- Begin extension snippets. -->
