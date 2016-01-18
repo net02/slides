@@ -31,101 +31,169 @@
                 <h1>Architectural patterns<br/>&amp;<br/>Best practices<br/><small>Lesson 10</small></h1>
             </section>
             <section class="slide">
-                <h2>What is Software Architecture?</h2>
-                <p>the process of defining a structured solution that meets all of the technical and operational requirements, while optimizing common quality attributes such as performance, security, and manageability
-
-                    the organization of a software system including the selection of the structural elements and their interfaces by which the system is composed; behavior as specified in collaboration among those elements; composition of these structural and behavioral elements into larger subsystems; and an architectural style that guides this organization. Software architecture also involves functionality, usability, resilience, performance, reuse, comprehensibility, economic and technology constraints, tradeoffs and aesthetic concerns
-
-                    common recurring themes: breakdown of a system into its parts; the decisions that are hard to change; there are multiple architectures in a system; what is architecturally significant can change over a system's lifetime; and, in the end, architecture boils down to whatever the important stuff is
-
-                    comprise software elements, the externally visible properties of those elements, and the relationships among them. Architecture is concerned with the public side of interfaces
-
-                    https://msdn.microsoft.com/en-us/library/ee658098.aspx</p>
+                <h2>Software Architecture<br/><small><strong>what</strong> and why?</small></h2>
+                <p>Breakdown of the structure or structures of the system, which comprise software elements, the externally visible properties of those elements, and the relationships among them.</p>
+                <ul class="slide">
+                    <li>Requirements (technical and operational)</li>
+                    <li>Optimizing performance, security, and manageability</li>
+                    <li>Can change over a system's lifetime</li>
+                </ul>
                 <div class="slide">
-                    <h3>More</h3>
-                    <p>info</p>
+                    <blockquote>
+                      <p>in the end, architecture boils down to whatever the important stuff is</p>
+                      <p><cite>Martin Fowler</cite></p>
+                    </blockquote>
                 </div>
             </section>
             <section class="slide">
-                <h2>Why is Architecture Important?</h2>
-                <p>The risks exposed by poor architecture include software that is unstable, is unable to support existing or future business requirements, or is difficult to deploy or manage in a production environment.
-
-                    Systems should be designed with consideration for the user, the system (the IT infrastructure), and the business goals</p>
-                <img style="min-width:30%" src="images/lesson10/user-system-business.png" />
+                <h2>Software Architecture<br/><small>what and <strong>why?</strong></small></h2>
+                <div style="float:left">
+                    <h3>Design carefully!</h3>
+                    <ul>
+                        <li>Sofware instabile</li>
+                        <li>Bassa manutenibilità</li>
+                        <li>Difficoltà di deploy</li>
+                        <li>Incompatibilità con requisiti attuali</li>
+                        <li>Incompatibilità con requisiti futuri</li>
+                    </ul>
+                </div>
                 <div class="slide">
-                    <h3></h3>
-                    <p></p>
+                    <div style="float:right">
+                        <h3>Goals and tradeoffs</h3>
+                        <img src="images/lesson10/user-system-business.png" />
+                    </div>
                 </div>
             </section>
             <section class="slide">
-                <h2>Architectural styles and patterns</h2>
-                <p>is a general, reusable solution to a commonly occurring problem
-
-                The architecture of a software system is almost never limited to a single architectural style, but is often a combination of architectural styles that make up the complete system</p>
-                <div class="slide">
-                    <h3></h3>
-                    <p>https://en.wikipedia.org/wiki/List_of_software_architecture_styles_and_patterns</p>
-                </div>
-            </section>
-            <section class="slide">
-                <h2>Key Design Principles</h2>
+                <h2>Design Principles</h2>
                 <ul>
-                    <li>Separation of concerns</li>
-                    <li>Single Responsibility principle</li>
-                    <li>Principle of Least Knowledge</li>
-                    <li>Don’t repeat yourself (DRY)</li>
-                    <li>Minimize upfront design</li>
+                    <li class="slide">Separation of concerns</li>
+                    <li class="slide">Single Responsibility principle</li>
+                    <li class="slide">Principle of Least Knowledge</li>
+                    <li class="slide">Don't repeat yourself (DRY)</li>
+                    <li class="slide">Minimize upfront design <em>("You ain’t gonna need it")</em></li>
                 </ul>
             </section>
             <section class="slide">
-                <h2>Application Layers</h2>
-                <p>https://msdn.microsoft.com/en-us/library/ee658124.aspx</p>
+                <h2>Styles and patterns</h2>
+                <p>Un insieme di regole e vocaboli che descrivono un'<strong>astrazione</strong> di una famiglia di sistemi.</p>
                 <div class="slide">
-                    <h3></h3>
-                    <p></p>
+                    <ul>
+                        <li>Client/Server</li>
+                        <li>Component-Based</li>
+                        <li>Layered Architecture</li>
+                        <li>Domain Driven Design</li>
+                        <li>Message Bus</li>
+                        <li>N-Tier / 3-Tier</li>
+                        <li>Object-Oriented</li>
+                        <li>Service-Oriented Architecture (SOA)</li>
+                    </ul>
                 </div>
             </section>
             <section class="slide">
-                <h2>3- tier</h2>
-                <p>https://en.wikipedia.org/wiki/Multitier_architecture#Three-tier_architecture</p>
-                <ul>
-                    <li>for implementing user interfaces</li>
-                    <li>presentation, application processing, and data management functions are physically separated</li>
-                </ul>
-                <p></p>
+                <h2>3-Tier</h2>
+                <div style="float:left">
+                    <p>Fisicamente separati:</p>
+                    <ul>
+                        <li>Presentation tier</li>
+                        <li>Application tier</li>
+                        <li>Data tier</li>
+                    </ul>
+                </div>
+                <div style="float:right">
+                    <img src="images/lesson10/three-tier.png" />
+                </div>
             </section>
             <section class="slide">
                 <h2>Model–view–controller</h2>
-                <p>Traditionally used for desktop graphical user interfaces, this architecture has become extremely popular for designing web applications
-                MVC web frameworks now hold large market shares relative to non-MVC web toolkits</p>
+                <p>Nasce per lo sviluppo di GUI desktop ('80), è diventata poi popolare nello sviluppo di applicazioni web.</p>
+                <ul>
+                    <li><strong>Model</strong>: accesso dati, business logic</li>
+                    <li><strong>View</strong>: rappresentazioni dei dati</li>
+                    <li><strong>Controller</strong>: riceve input, aggiorna lo stato del modello o la vista</li>
+                </ul>
+                <img src="images/lesson10/mvc.png" />
                 <div class="slide">
-                    <h3></h3>
-                    <p>variants such as HMVC, MVA, MVP, MVVM</p>
+                    <p style="font-weight: bold; text-align: center"><em>thin</em> vs <em>thick</em> client</p>
                 </div>
-                https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller
+            </section>
+            <section class="slide">
+                <h2>Model–view–controller<br/><small>and more</small></h2>
+                <p>Si è evoluto in varianti come HMVC, MVA, MVP, MVVM</p>
+                <img src="images/lesson10/mva.png" />
+                <br/>
+                <img src="images/lesson10/mvvm.png" />
             </section>
             <section class="slide">
                 <h2>Microservices</h2>
-                <p>Do one thing and do it well</p>
+                <p>Relativamente nuovo (~2010)</p>
+                <img src="images/lesson10/microservices.png" />
+            </section>
+            <section class="slide">
+                <h2>Microservices</h2>
+                <blockquote>
+                    <p>Do one thing and do it well</p>
+                </blockquote>
+                <h3>Pro</h3>
+                <ul>
+                    <li>ogni servizio è sostituibile</li>
+                    <li>implementazione disomogenea (linguaggio di programmazione / database / environment)</li>
+                    <li>architettura simmetrica anziché gerarchica (pipeline)</li>
+                    <li>solitamente comunicano via URI</li>
+                </ul>
+                <h3>Contro</h3>
+                <ul>
+                    <li>information barriers</li>
+                    <li>complessità aggiuntiva (latenza di rete / load balancing / fault tolerance)</li>
+                    <li>architettura simmetrica anziché gerarchica (pipeline)</li>
+                    <li>test &amp; deploy</li>
+                </ul>
+            </section>
+            <section class="slide">
+                <h2>Big ball of mud<br/><small>the de-facto standard architecture</small></h2>
+                <img style="width:100%" src="images/lesson10/mud.gif" />
                 <div class="slide">
-                    <h3></h3>
-                    <p></p>
+                    <blockquote>
+                      <p>.. is a haphazardly structured, sprawling, sloppy, duct-tape-and-baling-wire, spaghetti-code jungle.<br/>[..] Information is shared promiscuously among distant elements of the system, often to the point where nearly all the important information becomes global or duplicated.<br/>[..] Only those who are unconcerned about architecture, and, perhaps, are comfortable with the inertia of the day-to-day chore of patching the holes in these failing dikes, are content to work on such systems.</p>
+                      <p><cite>Brian Foote and Joseph Yoder</cite></p>
+                    </blockquote>
                 </div>
-                https://en.wikipedia.org/wiki/Microservices
             </section>
             <section class="slide">
-                <h2>Big ball of mud</h2>
-                <p>https://en.wikipedia.org/wiki/Big_ball_of_mud</p>
+                <h2>Best practices</h2>
+                <p>Regole informali per migliorare la <strong>qualità del software</strong></p>
+                <blockquote>
+                    <p>The first 90% of the code accounts for the first 90% of the development time. The remaining 10% of the code accounts for the other 90% of the development time.</p>
+                    <p><cite><em>Ninety-ninety rule</em>, Tim Cargill</cite></p>
+                </blockquote>
                 <div class="slide">
-                    <h3></h3>
-                    <p></p>
+                    <ol>
+                        <li>Know what the code block must perform</li>
+                        <li>Indicate a brief description of what a variable is for (reference to commenting)</li>
+                        <li>Correct errors as they occur</li>
+                        <li>Keep your code simple</li>
+                        <li>Maintain naming conventions which are uniform throughout</li>
+                    </ol>
                 </div>
             </section>
             <section class="slide">
-                <p>https://it.wikipedia.org/wiki/Code_smell</p>
-            </section>
-            <section class="slide">
-                <p>https://it.wikipedia.org/wiki/Don%27t_Repeat_Yourse</p>
+                <h2>Code smell<br/><small>it works but..</small></h2>
+                <ul style="float:left">
+                    <li>Codice duplicato</li>
+                    <li>Metodo troppo lungo</li>
+                    <li>Classe troppo grande</li>
+                    <li>Lista di parametri troppo lunga</li>
+                    <li>Feature envy o data envy</li>
+                    <li>Magic numbers</li>
+                    <li>Espressioni complesse</li>
+                    <li>What comments</li>
+                    <li>Nomi oscuri o inconsistenti</li>
+                    <li>Dead code</li>
+                    <li>Generalità speculativa</li>
+                </ul>
+                <div style="float:right">
+                    <img src="images/lesson10/copypaste.gif" />
+                </div>
             </section>
             <!-- End slides. -->
 
