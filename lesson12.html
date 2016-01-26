@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=1024, user-scalable=no">
+        <title>Design patterns (part 2)</title>
+        <!-- Required stylesheet -->
+        <link rel="stylesheet" media="screen" href="core/deck.core.css">
+        <!-- Extension CSS files go here. Remove or add as needed. -->
+        <link rel="stylesheet" media="screen" href="extensions/goto/deck.goto.css">
+        <link rel="stylesheet" media="screen" href="extensions/menu/deck.menu.css">
+        <link rel="stylesheet" media="screen" href="extensions/navigation/deck.navigation.css">
+        <link rel="stylesheet" media="screen" href="extensions/status/deck.status.css">
+        <link rel="stylesheet" media="screen" href="extensions/scale/deck.scale.css">
+        <link rel="stylesheet" media="screen" href="extensions/google-code-prettify/prettify.css">
+        <!-- Style theme. More available in /themes/style/ or create your own. -->
+        <link rel="stylesheet" media="screen" href="themes/style/web-2.0.css">
+        <!-- Transition theme. More available in /themes/transition/ or create your own. -->
+        <link rel="stylesheet" media="screen" href="themes/transition/horizontal-slide.css">
+        <!-- Basic black and white print styles -->
+        <link rel="stylesheet" media="print" href="core/print.css">
+        <link rel="stylesheet" media="screen" href="themes/overrides.css">
+        <!-- Required Modernizr file -->
+        <script src="modernizr.custom.js"></script>
+    </head>
+    <body>
+        <div class="deck-container">
+            <!-- Begin slides. Just make elements with a class of slide. -->
+            <section class="slide">
+                <h1>Design patterns<br/>(part 2)<br/><small>Lesson 12</small></h1>
+            </section>
+            <section class="slide">
+                <h2>Design patterns<br/><small>Classificazione</small></h2>
+                <ul>
+                    <li><em>creazionali</em></li>
+                    <li>strutturali</li>
+                    <li>comportamentali</li>
+                </ul>
+            </section>
+            <section class="slide">
+                <h2>Structural patterns</h2>
+                <ul>
+                    <li>Decorator</li>
+                    <li>Adapter</li>
+                    <li>Façade</li>
+                    <li>Proxy</li>
+                    <li>Front controller</li>
+                </ul>
+                <p>Semplificano la progettazione identificando topologie di relazioni tra oggetti.</p>
+            </section>
+            <section class="slide">
+                <h2>Structural patterns<br/><small>Decorator</small></h2>
+                <ul>
+                    <li><strong>Problema:</strong> aggiungere (una o più) funzionalità ad un oggetto, senza modificare tutti gli oggetti della stessa classe.</li>
+                    <li><strong>Problema:</strong> aggiungere (una o più) funzionalità ad un oggetto dinamicamente (a <em>run-time</em>).</li>
+                </ul>
+                <p class="slide">Potrei utilizzare delle sottoclassi per ogni nuova funzionalità..</p>
+            </section>
+            <section class="slide">
+                <h2>Structural patterns<br/><small>Decorator</small></h2>
+                <p>.. ma dovrei comprendere tutte le possibili combinazioni!</p>
+                <img src="images/lesson12/pre-decorator.png" />
+            </section>
+            <section class="slide">
+                <h2>Structural patterns<br/><small>Decorator</small></h2>
+                <ul>
+                    <li><strong>Soluzione:</strong> un decoratore per funzionalità, ed impacchetto (<em>wrapping</em>) l'oggetto con uno o più decoratori.</li>
+                </ul>
+                <img src="images/lesson12/decorator.png" />
+            </section>
+            <section class="slide">
+                <h2>Structural patterns<br/><small>Decorator</small></h2>
+                <pre class="prettyprint lang-php">$window = new BorderDecorator(
+    new HorizontalScrollBarDecorator(
+        new VerticalScrollBarDecorator(
+            new Window( 80, 24 )
+        )
+    )
+);
+$window->draw();</pre>
+            </section>
+            <section class="slide">
+                <h2>Structural patterns<br/><small>Adapter</small></h2>
+                <ul>
+                    <li><strong>Problema:</strong> riutilizzare un componente "incompatibile" con una nuova interfaccia.</li>
+                    <li><strong>Soluzione:</strong> impacchetto il componente con un "traduttore" per la nuova interfaccia.</li>
+                </ul>
+                <img class="slide" style="max-height: 40%" src="images/lesson12/adapters.svg" />
+            </section>
+            <section class="slide">
+                <h2>Structural patterns<br/><small>Adapter</small></h2>
+                <img src="images/lesson12/adapter.png" />
+            </section>
+            <section class="slide">
+                <h2>Structural patterns<br/><small>Façade</small></h2>
+                <ul>
+                    <li><strong>Problema:</strong> riutilizzare uno o più componenti (complessi) che non presentano un'interfaccia.</li>
+                    <li><strong>Soluzione:</strong> creo una interfaccia che incapsula il componente (SPA).</li>
+                </ul>
+                <img src="images/lesson12/facade.png" />
+            </section>
+            <section class="slide">
+                <h2>Structural patterns<br/><small>Façade</small></h2>
+                <ul>
+                    <li>violazione di <strong>interface segregation</strong> e <strong>single responsibility</strong></li>
+                    <li>creo un'interfaccia che prima non esisteva</li>
+                    <li>collego componenti scorrelati tra loro</li>
+                    <li><em>produce a simpler interface vs design to an existing interface</em></li>
+                </ul>
+            </section>
+            <section class="slide">
+                <h2>Structural patterns<br/><small>Proxy</small></h2>
+                <ul>
+                    <li><strong>Problema:</strong> instanziare un oggetto solamente se (e quando) viene effettivamente utilizzato.</li>
+                    <li><strong>Problema:</strong> nascondere alcune parti o funzioni di un oggetto.</li>
+                    <li><strong>Soluzione:</strong> delego le funzionalità ad un "agente" che condivide l'interfaccia con l'oggetto.</li>
+                </ul>
+                <img class="slide" style="max-height: 40%" src="images/lesson12/proxy-example.png" />
+            </section>
+            <section class="slide">
+                <h2>Structural patterns<br/><small>Proxy</small></h2>
+                <img src="images/lesson12/proxy.png" />
+                <p>
+                    L'interfaccia fa in modo che il <em>Proxy</em> e l'oggetto originale siano interscambiabili: posso utilizzare una <em>Factory</em> per decidere quale dei due utilizzare.
+                </p>
+            </section>
+            <section class="slide">
+                <h2>Structural patterns<br/><small>Front controller</small></h2>
+                <ul>
+                    <li>Specifico per applicazioni web</li>
+                    <li>Fornisce un unico punto di ingresso per le richieste</li>
+                    <li>Esegue tutti i <strong>task</strong> comuni (sessioni, cache, input filtering)</li>
+                    <li>Instanzia e richiama gli oggetti che gestiscono successivamente la specifica richiesta</li>
+                </ul>
+            </section>
+            <section class="slide">
+                <h2>Structural patterns<br/><small>Front controller</small></h2>
+                <img style="padding:15px; background: white" src="images/lesson12/front-controller.gif" />
+            </section>
+            <section class="slide">
+                <h2>Behavioral patterns</h2>
+                <ul>
+                    <li>Iterator</li>
+                    <li>Mediator</li>
+                    <li>Observer</li>
+                    <li>Chain-of-responsibility</li>
+                    <li>Strategy / Template method</li>
+                </ul>
+                <p>Rappresentano strategie di comunicazione tra differenti oggetti, esponendo le responsabilità di ciascun oggetto.</p>
+                <div class="slide">
+                    <h3>Coupling</h3>
+                    <p>
+                        Misura l'interdipendenza tra gli oggetti: <em>tight coupling</em> = minore riusabilità (e testabilità)
+                    </p>
+                </div>
+            </section>
+            <section class="slide">
+                <h2>Behavioral patterns<br/><small>Iterator</small></h2>
+                <ul>
+                    <li><strong>Problema:</strong> "attraversare" una collezione di oggetti, indipendentemente dalla struttura dati.</li>
+                </ul>
+                <img class="slide" style="max-height: 40%" src="images/lesson12/iterator.png" />
+                <p class="slide"><strong>Generic programming</strong>: separare l'algoritmo dalla struttura dati.</p>
+            </section>
+            <section class="slide">
+                <h2>Behavioral patterns<br/><small>Mediator</small></h2>
+                <ul>
+                    <li><strong>Problema:</strong> molti oggetti che comunicano - e <strong>dipendono</strong> - tra loro.</li>
+                </ul>
+                <img class="slide" style="max-height: 40%" src="images/lesson12/mediator.png" />
+            </section>
+            <section class="slide">
+                <h2>Behavioral patterns<br/><small>Mediator</small></h2>
+                <p>
+                    Gli oggetti non parlano tra loro ma solo col mediatore
+                </p>
+                <img style="max-height: 40%" src="images/lesson12/mediator-example.png" />
+            </section>
+            <section class="slide">
+                <h2>Behavioral patterns<br/><small>Observer</small></h2>
+                <ul>
+                    <li><strong>Problema:</strong> un oggetto dovrebbe cambiare stato quando un altro oggetto cambia stato.</li>
+                </ul>
+                <img class="slide" style="max-height: 40%" src="images/lesson12/observer.png" />
+            </section>
+            <section class="slide">
+                <h2>Behavioral patterns<br/><small>Observer</small></h2>
+                <ul>
+                    <li>il primo soggetto deve solo notificare il suo cambiamento</li>
+                    <li>l'observer decide se il cambiamento interessa a qualcun'altro (<em>pull vs push</em>)</li>
+                    <li>implementa meccanismo publish - subscribe</li>
+                </ul>
+            </section>
+            <section class="slide">
+                <h2>Behavioral patterns<br/><small>Chain-of-responsibility</small></h2>
+                <h3>Gestisce il flusso del processo tra gli oggetti</h3>
+                <img class="slide" style="max-height: 40%" src="images/lesson12/chain.png" />
+                <p class="slide">Ogni <em>Handler</em> può gestire il messaggio o passarlo al successivo</p>
+            </section>
+            <section class="slide">
+                <h2>Behavioral patterns<br/><small>Strategy / Template method</small></h2>
+                <h3>Determina l'algoritmo a <em>run-time</em></h3>
+                <img class="slide" style="min-height: 40%; padding: 15px; background: white;" src="images/lesson12/strategy.png" />
+            </section>
+            <section class="slide">
+                <h2>Behavioral patterns<br/><small>Strategy / Template method</small></h2>
+                <p>
+                    Alternativamente con "pseudo codice"
+                </p>
+                <img src="images/lesson12/template-method.png" />
+            </section>
+            <!-- End slides. -->
+
+            <!-- Begin extension snippets. -->
+            <!-- deck.status snippet -->
+            <p class="deck-status" aria-role="status">
+                <span class="deck-status-current"></span>
+                /
+                <span class="deck-status-total"></span>
+            </p>
+            <!-- deck.goto snippet -->
+            <form action="." method="get" class="goto-form">
+                <label for="goto-slide">Go to slide:</label>
+                <input type="text" name="slidenum" id="goto-slide" list="goto-datalist">
+                <datalist id="goto-datalist"></datalist>
+                <input type="submit" value="Go">
+            </form>
+            <!-- End extension snippets. -->
+        </div>
+        <!-- Required JS files. -->
+        <script src="jquery.min.js"></script>
+        <script src="core/deck.core.js"></script>
+        <!-- Extension JS files. -->
+        <script src="extensions/menu/deck.menu.js"></script>
+        <script src="extensions/goto/deck.goto.js"></script>
+        <script src="extensions/status/deck.status.js"></script>
+        <script src="extensions/navigation/deck.navigation.js"></script>
+        <script src="extensions/scale/deck.scale.js"></script>
+        <script src="extensions/events/deck.events.js"></script>
+        <script src="extensions/step/deck.step.js"></script>
+        <script src="extensions/anim/deck.anim.js"></script>
+        <script src="extensions/google-code-prettify/prettify.js"></script>
+        <script src="extensions/lessons.js"></script>
+    </body>
+</html>
