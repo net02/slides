@@ -33,11 +33,53 @@
             <section class="slide">
                 <h2></h2>
                 <p>
+                    http://www.tutorialspoint.com/php/php_get_post.htm
                     http://php.net/manual/en/tutorial.forms.php get vs post rest o meno
                     http://php.net/manual/en/ref.filter.php filtra input
-                    http://php.net/manual/it/features.file-upload.php (configurazioni varie)
+                    http://php.net/manual/it/features.file-upload.php (configurazioni varie) multipart
                     http://php.net/manual/en/wrappers.php.php input stream
                     http://php.net/manual/it/features.file-upload.put-method.php put?
+                </p>
+            </section>
+            <section class=slide>
+                <pre class="scroll">GET /slides/lesson14.html HTTP/1.1
+Host: localhost
+Connection: keep-alive
+Pragma: no-cache
+Cache-Control: no-cache
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: it-IT,it;q=0.8,en-US;q=0.6,en;q=0.4
+Cookie: _ga=GA1.1.180809368.1429475422</pre>
+            </section>
+            <section class="slide" id="server">
+                <pre class="result hide"></pre>
+            </section>
+            <section class="slide">
+                <h2>boh</h2>
+                <form action="examples/lesson14/get.php" method="GET" class="ajax">
+                    <input type="text" name="asd" />
+                    <input type="text" name="bar" />
+                    <input type="submit" name="test" value="go" />
+                </form>
+                <pre class="result hide"></pre>
+                <form action="examples/lesson14/post.php" method="POST" class="ajax">
+                    <input type="text" name="asd" />
+                    <input type="text" name="bar" />
+                    <input type="submit" name="test" value="go" />
+                </form>
+                <pre class="result hide"></pre>
+            </section>
+            <section class="slide">
+                <h2></h2>
+                <p>
+                    https://it.wikipedia.org/wiki/Espressione_regolare
+                    http://www.tutorialspoint.com/php/php_regular_expression.htm posix vs PCRE (perl) - posix morto
+                    http://php.net/manual/en/reference.pcre.pattern.syntax.php PCRE
+                    http://php.net/manual/en/function.preg-match.php esempi
+
                 </p>
             </section>
             <!-- End slides. -->
@@ -72,5 +114,34 @@
         <script src="extensions/anim/deck.anim.js"></script>
         <script src="extensions/google-code-prettify/prettify.js"></script>
         <script src="extensions/lessons.js"></script>
+        <script type="text/javascript">
+            $('form.ajax').submit(function (ev) {
+                $this = $(this);
+                var pre = $this.next("pre.result");
+                $.ajax({
+                    type: $this.attr('method'),
+                    url: $this.attr('action'),
+                    data: $this.serialize(),
+                    success: function (data) {
+                        pre.html(data);
+                        pre.removeClass('hide');
+                    }
+                });
+                ev.preventDefault();
+            });
+            $("#server").bind('deck.becameCurrent', function(ev, direction) {
+                var pre = $(this).find("pre.result");
+                if (pre.hasClass('hide')) {
+                    $.ajax({
+                        type: "GET",
+                        url: "examples/lesson14/server.php",
+                        success: function (data) {
+                            pre.html(data);
+                            pre.removeClass('hide');
+                        }
+                    });
+                }
+            });
+        </script>
     </body>
 </html>
