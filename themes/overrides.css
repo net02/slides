@@ -21,11 +21,11 @@ blockquote { font-size: 1em; padding: 1em 1em .5em 1em; }
 }
 .greyed { opacity: 0.4; }
 .hide { display: none !important; }
-pre.scroll {
+pre.scroll, pre.xdebug-var-dump {
     white-space: pre-wrap;       /* CSS 3 */
     white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
     white-space: -pre-wrap;      /* Opera 4-6 */
     white-space: -o-pre-wrap;    /* Opera 7 */
     word-wrap: break-word;       /* Internet Explorer 5.5+ */
-    overflow: auto;
+    max-height: 100%;
 }
