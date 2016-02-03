@@ -147,6 +147,15 @@ Accept-Language: it-IT,it;q=0.8,en-US;q=0.6,en;q=0.4</pre>
                 <div class="result hide"></div>
             </section>
             <section class="slide">
+                <h2>Forms<br/><small>Sanitize user input!</small></h2>
+                <img src="images/lesson14/injection.png" />
+                <div class="slide">
+                    <p>
+                        <strong>htmlspecialchars()</strong> &amp; <strong>filter_var()</strong>
+                    </p>
+                </div>
+            </section>
+            <section class="slide">
                 <h2>Sending information<br/><small>using POST</small></h2>
                 <p>
                     I dati vengono codificati ed appesi come contenuto della richiesta
@@ -185,12 +194,30 @@ name1=value1&name2=value2
                 <p>
                     Utilizzando POST posso inviare qualsiasi tipo di contenuto, testuale o binario.
                 </p>
-                <p class="slide">Tramite form HTML posso allegare alla richiesta uno o più file.</p>
+                <div class="slide">
+                    <p>Tramite form HTML posso allegare alla richiesta uno o più file.</p>
+                    <ul>
+                        <li>nessun limite teorico</li>
+                        <li>accessibile dalla variabile <em>$_FILES</em></li>
+                    </ul>
+                </div>
             </section>
             <section class="slide">
                 <h2>Forms<br/><small>Files</small></h2>
-                <pre class="prettyprint lang-html">&lt;!-- Tipo di codifica dei dati, DEVE essere specificato come segue --&gt;
-&lt;form enctype=&quot;multipart/form-data&quot; action=&quot;file.php&quot; method=&quot;POST&quot;&gt;
+                <p>
+                    Limiti reali imposti dalla configurazione (<em>php.ini</em>)
+                </p>
+                <ul>
+                    <li><strong>file_uploads</strong> on/off</li>
+                    <li><strong>upload_max_filesize</strong></li>
+                    <li><strong>post_max_size</strong></li>
+                    <li><strong>max_file_uploads</strong></li>
+                    <li><strong>max_input_time</strong> tempo di upload</li>
+                </ul>
+            </section>
+            <section class="slide">
+                <h2>Forms<br/><small>Files</small></h2>
+                <pre class="prettyprint lang-html">&lt;form enctype=&quot;multipart/form-data&quot; action=&quot;file.php&quot; method=&quot;POST&quot;&gt;
     Send this file: &lt;input name=&quot;userfile&quot; type=&quot;file&quot; /&gt;
     &lt;input type=&quot;submit&quot; value=&quot;Send File&quot; /&gt;
 &lt;/form&gt;</pre>
@@ -198,51 +225,124 @@ name1=value1&name2=value2
             <section class="slide">
                 <h2>Forms<br/><small>Files</small></h2>
                 <form action="examples/lesson14/file.php" method="POST" class="ajaxfile">
+                    <p>Save as: <input name="newname" type="text" /></p>
                     <p>Send this file: <input name="userfile" type="file" /></p>
+                    <p><input type="submit" value="Send File" /></p>
+                </form>
+                <div class="result hide"></div>
+            </section><section class="slide">
+                <h2>Forms<br/><small>Files</small></h2>
+                <p>
+                    <strong>multipart/form-data</strong> modifica la codifica del contenuto della richiesta
+                    <pre class="scroll">POST /slides/examples/lesson14/file.php HTTP/1.1
+Content-Length: 39130
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryGvQzFVXIoBDae9v8
+
+------WebKitFormBoundaryGvQzFVXIoBDae9v8
+Content-Disposition: form-data; name="newname"
+
+test
+------WebKitFormBoundaryGvQzFVXIoBDae9v8
+Content-Disposition: form-data; name="userfile"; filename="report_video.png"
+Content-Type: image/png
+
+
+------WebKitFormBoundaryGvQzFVXIoBDae9v8--
+</pre>
+                </p>
+            </section>
+            <section class="slide">
+                <h2>Forms<br/><small>Files</small></h2>
+                <p>
+                    Per ciascun file allegato ho a disposizione
+                </p>
+                <ul>
+                    <li><strong>name</strong>: nome originale del file</li>
+                    <li><strong>type</strong>: <em>mime-type</em> del file (fornito dal browser)</li>
+                    <li><strong>size</strong>: dimensione in byte</li>
+                    <li><strong>tmp_name</strong>: percorso del file temporaneo</li>
+                    <li><strong>error</strong>: <a href="http://php.net/manual/it/features.file-upload.errors.php" target="_blank">codice di errore</a> associato</li>
+                </ul>
+            </section>
+            <section class="slide">
+                <h2>Forms<br/><small>File handling</small></h2>
+                <p>
+                    <strong>is_uploaded_file()</strong>: verifica se il file indicato proviene da un upload tramite form.
+                </p>
+                <p>
+                    <strong>move_uploaded_file()</strong>: muove un file caricato in una nuova posizione sul server.
+                </p>
+                <p class="slide">Il file temporaneo viene in ogni caso rimosso automaticamente al termine dell'esecuzione della richiesta.</p>
+            </section>
+            <section class="slide">
+                <h2>Forms<br/><small>Files</small></h2>
+                <form action="examples/lesson14/file.php" method="POST" class="ajaxfile">
+                    <p>userfile[]: <input name="userfile[]" type="file" /></p>
+                    <p>userfile[]: <input name="userfile[]" type="file" /></p>
+                    <p>anotherfile: <input name="anotherfile" type="file" /></p>
                     <p><input type="submit" value="Send File" /></p>
                 </form>
                 <div class="result hide"></div>
             </section>
             <section class="slide">
-                <h2>Forms<br/><small>Files</small></h2>
+                <h2>Regular expressions</h2>
+                <img class="slide" src="images/lesson14/regex.jpg" />
+            </section>
+            <section class="slide">
+                <h2>Regular expressions</h2>
+                <blockquote>
+                    <p>una stringa che identifica un insieme di stringhe</p>
+                </blockquote>
+                <div class="slide">
+                    <p>Utilizzo dei caratteri speciali per definire un <em>pattern</em></p>
+                    <pre>// un indirizzo email
+^[a-zA-Z0-9_-.]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$</pre>
+                </div>
+            </section>
+            <section class="slide">
+                <h2>Regular expressions<br/><small>PCRE</small></h2>
                 <p>
-
+                    Da PHP 5.3 l'unico formato supportato per le espressioni regolari è PCRE
                 </p>
+                <ul>
+                    <li><em>pattern</em> racchiuso da un delimitatore </li>
+                    <li>posso aggiungere modificatori (case-insensitive, multiline..)</li>
+                </ul>
             </section>
             <section class="slide">
-                <h2></h2>
+                <h2>Regular expressions<br/><small>Classi di caratteri</small></h2>
+                <ul>
+                    <li><strong>.</strong> qualsiasi carattere</li>
+                    <li><strong>\w</strong> lettera (o underscore)</li>
+                    <li><strong>\W</strong> non-lettera</li>
+                    <li><strong>\d</strong> numero</li>
+                    <li><strong>\D</strong> non-numero</li>
+                    <li><strong>\s</strong> spazi (etc)</li>
+                    <li><strong>\S</strong> non-spazi</li>
+                    <li><strong>[aeiou]</strong> insieme di caratteri</li>
+                    <li><strong>[^aeiou]</strong> insieme negato</li>
+                    <li><strong>[g-s]</strong> range di valori</li>
+                </ul>
+            </section>
+            <section class="slide">
+                <h2>Regular expressions<br/><small>Quantificatori</small></h2>
+                <p>Appesi ad un carattere (o classe di carattere)</p>
+                <ul>
+                    <li><strong>+</strong> uno o più</li>
+                    <li><strong>*</strong> zero o più</li>
+                    <li><strong>?</strong> uno o zero</li>
+                    <li><strong>{1,3}</strong> quantità specifica</li>
+                    <li><strong>|</strong> or logico <em>(a|e|i)</em></li>
+                </ul>
+            </section>
+            <section class="slide">
+                <h2>Regular expressions<br/><small>Gruppi</small></h2>
+                <ul>
+                    <li><strong>()</strong> "cattura" un gruppo</li>
+                    <li><strong>\1</strong> referenza a un elemento "catturato"</li>
+                </ul>
                 <p>
-                    http://www.tutorialspoint.com/php/php_get_post.htm
-                    http://php.net/manual/en/tutorial.forms.php get vs post rest o meno
-                    http://php.net/manual/en/ref.filter.php filtra input
-                    http://php.net/manual/it/features.file-upload.php (configurazioni varie) multipart
-                    http://php.net/manual/en/wrappers.php.php input stream
-                    http://php.net/manual/it/features.file-upload.put-method.php put?
-                </p>
-            </section>
-            <section class="slide">
-                <h2>boh</h2>
-                <form action="examples/lesson14/get.php" method="GET" class="ajax">
-                    <input type="text" name="asd" />
-                    <input type="text" name="bar" />
-                    <input type="submit" name="test" value="go" />
-                </form>
-                <div class="result hide"></div>
-                <form action="examples/lesson14/post.php" method="POST" class="ajax">
-                    <input type="text" name="asd" />
-                    <input type="text" name="bar" />
-                    <input type="submit" name="test" value="go" />
-                </form>
-                <div class="result hide"></div>
-            </section>
-            <section class="slide">
-                <h2></h2>
-                <p>
-                    https://it.wikipedia.org/wiki/Espressione_regolare
-                    http://www.tutorialspoint.com/php/php_regular_expression.htm posix vs PCRE (perl) - posix morto
-                    http://php.net/manual/en/reference.pcre.pattern.syntax.php PCRE
-                    http://php.net/manual/en/function.preg-match.php esempi
-
+                    ad esempio <em>(\w)a\1</em> identifica l'insieme formato da "dad", "gag" etc.
                 </p>
             </section>
             <!-- End slides. -->
@@ -296,20 +396,20 @@ name1=value1&name2=value2
                 $this = $(this);
                 var pre = $this.next("div.result");
 
-                var formData = new FormData();
-                $this.find('input[type="file"]').each(function(idx, el) {
-                    formData.append($(el).attr('name'), $(el)[0].files[0]);
-                });
+                var formData = new FormData(this);
+//                $this.find('input[type="file"]').each(function(idx, el) {
+//                    formData.append($(el).attr('name'), $(el)[0].files[0]);
+//                });
                 $.ajax({
                     type: $this.attr('method'),
                     url: $this.attr('action'),
-                   data : formData,
-                   processData: false,
-                   contentType: false,
-                   success : function(data) {
+                    data : formData,
+                    processData: false,
+                    contentType: false,
+                    success : function(data) {
                        pre.html(data);
                        pre.removeClass('hide');
-                   }
+                    }
                 });
                 ev.preventDefault();
             });
